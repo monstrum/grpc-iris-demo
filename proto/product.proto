@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package product;
+
+option go_package = "./proto;product";
+
+message Product {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message ProductReq {
+  string name = 1;
+  string description = 2;
+}
+
+message CreateProductReq {
+  ProductReq product = 1;
+}
+
+message CreateProductResp {
+  Product product = 1;
+}
+
+message UpdateProductReq {
+  string id = 1;
+  ProductReq product = 2;
+}
+
+message UpdateProductResp {
+  Product product = 1;
+}
+
+message ReadProductReq {
+  string id = 1;
+}
+
+message ReadProductResp {
+  Product product = 1;
+}
+
+message DeleteProductReq {
+  string id = 1;
+}
+
+message EmptyResp {
+}
+
+service Api {
+  rpc create(CreateProductReq) returns (CreateProductResp);
+  rpc read(ReadProductReq) returns (ReadProductResp);
+  rpc update(UpdateProductReq) returns (UpdateProductResp);
+  rpc delete(DeleteProductReq) returns (EmptyResp);
+}
